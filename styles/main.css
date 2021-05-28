@@ -1,3 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: blueviolet;
+  /* height: 100vh; */
+  margin: 0;
+}
+
+
+.grid-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* making the grid pretty fast using this styling */
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 750px;
+  width: 450px;
+}
+
+.grid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 5%;
+  width: 10%;
+  font-size: x-small;
+}
+
+
+.block {
+  background-color: crimson;
 }
