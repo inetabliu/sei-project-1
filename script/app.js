@@ -2,7 +2,9 @@ function init() {
   //Grid with it's heights and width
   const grid = document.querySelector('.grid')
   const width = 10
-  const height = 20 
+  const height = 20
+  const arrowRight = 39
+  const arrowLeft = 37
 
   // State is a 2D array that can be accessed as state[x][y]
   const state = []
@@ -36,7 +38,6 @@ function init() {
   const blockTimer = setInterval(moveBlock, 1000)
 
   function moveBlock() {
-    console.log('starting position', position)
     const newY = position.y - 1
     if (newY < 0) {
       clearInterval(blockTimer)
@@ -46,7 +47,6 @@ function init() {
     removeBlock(position)
     position.y = newY
     addBlock(position)
-    console.log('end position', position)
   }
 
   function addBlock(pos) {
@@ -58,36 +58,43 @@ function init() {
   }
 
   //move elements to the right
-  // function moveRight(event) {
-  //   console.log(event.keyCode)
-  //   const keyRight = event.keyCode
-  //   removeBlock(blockCurrentPosition)
-  //   if (keyRight === 39 && blockCurrentPosition % width !==  width - 1) {
-  //     blockCurrentPosition++
-  //   } 
-  // }
+  function moveRight(event) {
+    const key = event.keyCode
+
+    if (key === arrowRight) {
+      const newX = position.x + 1
+
+      if (newX >= width) {
+        console.log('I can not go any more right')
+        return
+      }
+
+      removeBlock(position)
+      position.x = newX
+      addBlock(position)
+    }
+  }
 
   //move elements to the left
-  // function moveLeft(event) {
-  //   const keyLeft = event.keyCode
-  //   removeBlock(blockCurrentPosition)
-  //   if (keyLeft === 37 && blockCurrentPosition % width !== 0) {
-  //     blockCurrentPosition--
-  //   }
-  // }
+  function moveLeft(event) {
+    const key = event.keyCode
 
-  // function hardDrop(event) {
-  //   console.log(event.keyCode)
-  //   const keyDown = event.keyCode
-  //   if (keyDown === 40 && blockCurrentPosition + width <= width * width - 1) {
-  //     console.log('down')
-  //     blockCurrentPosition += width
-  //   }
-  // }
+    if (key === arrowLeft) {
+      const newX = position.x - 1
 
-  // document.addEventListener('keydown', moveRight)
-  // document.addEventListener('keydown', moveLeft)
-  // document.addEventListener('keydown', hardDrop)
+      if (newX < 0) {
+        console.log('I can not go any more left')
+        return
+      }
+
+      removeBlock(position)
+      position.x = newX
+      addBlock(position)
+    }
+  }
+
+  document.addEventListener('keydown', moveRight)
+  document.addEventListener('keydown', moveLeft)
 
   createPlayfield()
 }
