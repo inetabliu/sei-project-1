@@ -37,16 +37,22 @@ function init() {
     console.log(state)
   }
 
+  function spawnBlock() {
+    // Reset the position
+    position.x = startX
+    position.y = startY
+    // Add a new block
+    addBlock(position)
+  }
+
   function moveBlock() {
     const newY = position.y - 1
     if (newY < 0) {
       // We are at the end of the grid
-      // Reset the position
-      position.x = startX
-      position.y = startY
-
-      // Add a new block
-      addBlock(position)
+      spawnBlock()
+    } else if (state[position.x][newY].classList.contains('block')) {
+      // The next position is already occupied
+      spawnBlock()
     } else {
       // We are not at the end of the grid, so keep moving down
       removeBlock(position)
