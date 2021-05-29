@@ -38,3 +38,16 @@ body {
 .block {
   background-color: red;
 }
+
+@media  screen and  (max-width: 350px) {
+
+  .grid-wrapper {
+    height: 150vh;
+
+  }
+  .grid {
+    height: 550px;
+    width: 350px;
+  }
+}
+  
