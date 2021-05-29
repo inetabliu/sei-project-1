@@ -5,6 +5,8 @@ function init() {
   const height = 20
   const arrowRight = 39
   const arrowLeft = 37
+  const startX = 4
+  const startY = height - 1
 
   // State is a 2D array that can be accessed as state[x][y]
   const state = []
@@ -16,8 +18,8 @@ function init() {
   // const state = new Array(width * height)
   // let elements
   const position = {
-    x: 4,
-    y: 19
+    x: startX,
+    y: startY
   }
 
   // Grid with x & y coordinates as id's on it.
@@ -35,18 +37,22 @@ function init() {
     console.log(state)
   }
 
-  const blockTimer = setInterval(moveBlock, 1000)
-
   function moveBlock() {
     const newY = position.y - 1
     if (newY < 0) {
-      clearInterval(blockTimer)
-      return
-    }
-  
-    removeBlock(position)
-    position.y = newY
-    addBlock(position)
+      // We are at the end of the grid
+      // Reset the position
+      position.x = startX
+      position.y = startY
+
+      // Add a new block
+      addBlock(position)
+    } else {
+      // We are not at the end of the grid, so keep moving down
+      removeBlock(position)
+      position.y = newY
+      addBlock(position)
+    }  
   }
 
   function addBlock(pos) {
@@ -97,6 +103,8 @@ function init() {
   document.addEventListener('keydown', moveLeft)
 
   createPlayfield()
+  addBlock(position) // draw first block
+  setInterval(moveBlock, 1000) // start game
 }
 
 window.addEventListener('DOMContentLoaded', init)
