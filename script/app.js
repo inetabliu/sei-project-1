@@ -78,12 +78,13 @@ function init() {
 
       if (newX >= width) {
         console.log('I can not go any more right')
-        return
+      } else if (state[newX][position.y].classList.contains('block')) {
+        console.log('I can not go any more right')
+      } else {
+        removeBlock(position)
+        position.x = newX
+        addBlock(position)
       }
-
-      removeBlock(position)
-      position.x = newX
-      addBlock(position)
     }
   }
 
@@ -96,12 +97,14 @@ function init() {
 
       if (newX < 0) {
         console.log('I can not go any more left')
-        return
+      } else if (state[newX][position.y].classList.contains('block')) {
+        console.log('I can not go any more left')
+      } else {
+        removeBlock(position)
+        position.x = newX
+        addBlock(position)
       }
-
-      removeBlock(position)
-      position.x = newX
-      addBlock(position)
+      
     }
   }
 
@@ -110,7 +113,7 @@ function init() {
 
   createPlayfield()
   addBlock(position) // draw first block
-  setInterval(moveBlock, 1000) // start game
+  setInterval(moveBlock, 200) // start game
 }
 
 window.addEventListener('DOMContentLoaded', init)
