@@ -25,7 +25,7 @@ function init() {
     console.log('my blocks->', state)
   }
 
-  const blockTimer = setInterval(moveBlock, 500)
+  const blockTimer = setInterval(moveBlock, 1000)
 
   function moveBlock() {
     const blockNewPosition = blockCurrentPosition + width
