@@ -33,16 +33,31 @@ function init() {
         state[x][y] = block
       }
     }
+  }
 
-    console.log(state)
+  function getRow(y) {
+    //returns an array of all blocks on row y
+    const row = []
+    for (let x = 0; x < width; x++) {
+      row.push(state[x][y])
+    }
+
+    return row
   }
 
   function spawnBlock() {
-    // Reset the position
-    position.x = startX
-    position.y = startY
-    // Add a new block
-    addBlock(position)
+    const gameOver = getRow(height - 1).some(el => el.classList.contains('block'))
+    if (gameOver) {
+      clearInterval(playing)
+      console.log('game over->')
+    } else {
+      // Reset the position
+      position.x = startX
+      position.y = startY
+      // Add a new block
+      addBlock(position)
+    }
+    
   }
 
   function moveBlock() {
@@ -113,7 +128,8 @@ function init() {
 
   createPlayfield()
   addBlock(position) // draw first block
-  setInterval(moveBlock, 200) // start game
+  const playing = setInterval(moveBlock, 200) // start game
+  console.log('my state', state)
 }
 
 window.addEventListener('DOMContentLoaded', init)
