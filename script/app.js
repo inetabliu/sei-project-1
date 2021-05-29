@@ -10,12 +10,13 @@ function init() {
     // This feels complicated and probably needs rewriting
     state.push([])
   }
-  
-  const oldState = []
-  
+
   // const state = new Array(width * height)
   // let elements
-  let blockCurrentPosition = 4
+  const position = {
+    x: 4,
+    y: 19
+  }
 
   // Grid with x & y coordinates as id's on it.
   function createPlayfield(){
@@ -24,7 +25,6 @@ function init() {
         const block = document.createElement('div')
         block.setAttribute('id', `${x}-${y}`)
         grid.appendChild(block)
-        oldState.push(block)
         block.innerText = [`x ${x} - y ${y}`]
         state[x][y] = block
       }
@@ -36,75 +36,60 @@ function init() {
   const blockTimer = setInterval(moveBlock, 1000)
 
   function moveBlock() {
-    const blockNewPosition = blockCurrentPosition + width
-    if (blockNewPosition > oldState.length) {
+    console.log('starting position', position)
+    const newY = position.y - 1
+    if (newY < 0) {
       clearInterval(blockTimer)
-      return blockNewPosition
+      return
     }
-    removeBlock(blockCurrentPosition)
-    blockCurrentPosition = blockNewPosition
-    addBlock(blockCurrentPosition)
-    addBlock(blockNewPosition)
+  
+    removeBlock(position)
+    position.y = newY
+    addBlock(position)
+    console.log('end position', position)
   }
 
-  function addBlock(position) {
-    oldState[position].classList.add('block')
+  function addBlock(pos) {
+    state[pos.x][pos.y].classList.add('block')
   }
 
-  function removeBlock(position) {
-    oldState[position].classList.remove('block')
+  function removeBlock(pos) {
+    state[pos.x][pos.y].classList.remove('block')
   }
 
   //move elements to the right
-  function moveRight(event) {
-    console.log(event.keyCode)
-    const keyRight = event.keyCode
-    removeBlock(blockCurrentPosition)
-    if (keyRight === 39 && blockCurrentPosition % width !==  width - 1) {
-      blockCurrentPosition++
-    } 
-  }
+  // function moveRight(event) {
+  //   console.log(event.keyCode)
+  //   const keyRight = event.keyCode
+  //   removeBlock(blockCurrentPosition)
+  //   if (keyRight === 39 && blockCurrentPosition % width !==  width - 1) {
+  //     blockCurrentPosition++
+  //   } 
+  // }
 
   //move elements to the left
-  function moveLeft(event) {
-    const keyLeft = event.keyCode
-    removeBlock(blockCurrentPosition)
-    if (keyLeft === 37 && blockCurrentPosition % width !== 0) {
-      blockCurrentPosition--
-    }
-  }
+  // function moveLeft(event) {
+  //   const keyLeft = event.keyCode
+  //   removeBlock(blockCurrentPosition)
+  //   if (keyLeft === 37 && blockCurrentPosition % width !== 0) {
+  //     blockCurrentPosition--
+  //   }
+  // }
 
-  function hardDrop(event) {
-    console.log(event.keyCode)
-    const keyDown = event.keyCode
-    if (keyDown === 40 && blockCurrentPosition + width <= width * width - 1) {
-      console.log('down')
-      blockCurrentPosition += width
-    }
-  }
+  // function hardDrop(event) {
+  //   console.log(event.keyCode)
+  //   const keyDown = event.keyCode
+  //   if (keyDown === 40 && blockCurrentPosition + width <= width * width - 1) {
+  //     console.log('down')
+  //     blockCurrentPosition += width
+  //   }
+  // }
 
-  document.addEventListener('keydown', moveRight)
-  document.addEventListener('keydown', moveLeft)
-  document.addEventListener('keydown', hardDrop)
+  // document.addEventListener('keydown', moveRight)
+  // document.addEventListener('keydown', moveLeft)
+  // document.addEventListener('keydown', hardDrop)
 
   createPlayfield()
 }
 
-
 window.addEventListener('DOMContentLoaded', init)
-
-
-
-
-
-/// trash and used code 
-
-
-
-// coloring the block using ID
-// Coloring one block on the screen
-// function renderBlock(y, x, color){
-//   const myBlock = document.getElementById(`${x}-${y}`)
-//   myBlock.style.backgroundColor = color
-// }
-// renderBlock(19, 4, 'red')
