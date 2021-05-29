@@ -3,13 +3,19 @@ function init() {
   const grid = document.querySelector('.grid')
   const width = 10
   const height = 20 
+
+  // State is a 2D array that can be accessed as state[x][y]
   const state = []
+  for (let i = 0; i < width; i++) {
+    // This feels complicated and probably needs rewriting
+    state.push([])
+  }
+  
+  const oldState = []
   
   // const state = new Array(width * height)
   // let elements
   let blockCurrentPosition = 4
-  
-
 
   // Grid with x & y coordinates as id's on it.
   function createPlayfield(){
@@ -18,18 +24,20 @@ function init() {
         const block = document.createElement('div')
         block.setAttribute('id', `${x}-${y}`)
         grid.appendChild(block)
-        state.push(block)
+        oldState.push(block)
         block.innerText = [`x ${x} - y ${y}`]
-      }  
+        state[x][y] = block
+      }
     }
-    console.log('my blocks->', state)
+
+    console.log(state)
   }
 
   const blockTimer = setInterval(moveBlock, 1000)
 
   function moveBlock() {
     const blockNewPosition = blockCurrentPosition + width
-    if (blockNewPosition > state.length) {
+    if (blockNewPosition > oldState.length) {
       clearInterval(blockTimer)
       return blockNewPosition
     }
@@ -38,14 +46,14 @@ function init() {
     addBlock(blockCurrentPosition)
     addBlock(blockNewPosition)
   }
+
   function addBlock(position) {
-    state[position].classList.add('block')
+    oldState[position].classList.add('block')
   }
 
   function removeBlock(position) {
-    state[position].classList.remove('block')
+    oldState[position].classList.remove('block')
   }
-
 
   //move elements to the right
   function moveRight(event) {
@@ -56,13 +64,14 @@ function init() {
       blockCurrentPosition++
     } 
   }
+
   //move elements to the left
   function moveLeft(event) {
     const keyLeft = event.keyCode
     removeBlock(blockCurrentPosition)
     if (keyLeft === 37 && blockCurrentPosition % width !== 0) {
       blockCurrentPosition--
-    } //else if ('logic for making the block speed up on the down')
+    }
   }
 
   function hardDrop(event) {
@@ -73,13 +82,12 @@ function init() {
       blockCurrentPosition += width
     }
   }
-  console.log('my state length->', state.length)
+
   document.addEventListener('keydown', moveRight)
   document.addEventListener('keydown', moveLeft)
   document.addEventListener('keydown', hardDrop)
 
   createPlayfield()
-  console.log('my state length->', state.length)
 }
 
 
