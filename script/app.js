@@ -5,6 +5,7 @@ function init() {
   const height = 20
   const arrowRight = 39
   const arrowLeft = 37
+  // const arrowDown = 40
   const startX = 4
   const startY = height - 1
 
@@ -35,20 +36,19 @@ function init() {
     }
   }
 
+  //returns an array of all blocks on row y 
   function getRow(y) {
-    //returns an array of all blocks on row y
     const row = []
     for (let x = 0; x < width; x++) {
       row.push(state[x][y])
     }
-
     return row
   }
 
   function spawnBlock() {
     const gameOver = getRow(height - 1).some(el => el.classList.contains('block'))
     if (gameOver) {
-      clearInterval(playing)
+      clearInterval(playing)  
       console.log('game over->')
     } else {
       // Reset the position
@@ -123,8 +123,17 @@ function init() {
     }
   }
 
+  // function hardDrop(event) {
+  //   const key = event.keyCode
+  //   const speedIncrease = setInterval(moveBlock, 1500)
+  //   if (key === arrowDown) {
+  //     console.log('speed increasing', speedIncrease)
+  //   }
+  // }
+
   document.addEventListener('keydown', moveRight)
   document.addEventListener('keydown', moveLeft)
+  // document.addEventListener('keydown', hardDrop)
 
   createPlayfield()
   addBlock(position) // draw first block
