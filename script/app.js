@@ -48,6 +48,21 @@ function init() {
   function clearRow(y) {
     console.log(`clear row ${y}`)
     getRow(y).map(el => el.classList.remove('block'))
+    for (let i = y + 1; i < height; i++) {
+      getRow(i).map(el => {
+        if (el.classList.contains('block')) {
+          const coordinates = el.id.split('-').map(n => parseInt(n))
+          console.log('coordinates', coordinates)
+          const pos = {
+            x: coordinates[0],
+            y: coordinates[1]
+          } 
+          removeBlock(pos)
+          pos.y = pos.y - 1
+          addBlock(pos)
+        }
+      })
+    }
   }
 
   function spawnBlock() {
@@ -55,7 +70,7 @@ function init() {
       const fullRow = getRow(y).every(el => el.classList.contains('block'))
       if (fullRow) {
         clearRow(y)
-      }
+      } 
     }
     const gameOver = getRow(height - 1).some(el => el.classList.contains('block'))
     if (gameOver) {
