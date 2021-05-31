@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <script src="script/app.js" charset="utf-8"></script>
   <title>Document</title>
 </head>
@@ -13,13 +15,37 @@
 <body>
   <main>
     <div class="grid-wrapper">
+      <div class="score-board margin-top">
+        <ul>
+          <li>Rows Hit<span>:000</span></li>
+          <li>Total score<span>:000</span></li>
+          <li>Level<span></span>:1</li>
+        </ul>
+      </div>
       <div class="grid"></div>
-      <button id="start">Start</button>
+      <div class="controls">
+        <div>
+          <p class="overline">Press start for nanagon infinity</p>
+          <button id="start">Start</button>
+        </div>
+
+        <div class="small-grid">
+          <ul>
+            <li class="overline">Controls</li>
+            <li>Up Arrow: Rotate</li>
+            <li>Down Arrow: Soft Drop</li>
+            <li>Spacebar: Hard Drop</li>
+            <li>Pause Game: P or Esc</li>
+          </ul>
+        </div>
+
+      </div>
     </div>
-
-
   </main>
-
+  <footer>
+    <a href="https://github.com/inetabliu">Github</a>
+    <p>2021</p>
+  </footer>
 </body>
 
 </html>
