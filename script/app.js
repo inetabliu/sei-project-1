@@ -45,7 +45,18 @@ function init() {
     return row
   }
 
+  function clearRow(y) {
+    console.log(`clear row ${y}`)
+  }
+
   function spawnBlock() {
+    for ( let y = 0; y < height; y++) {
+      const fullRow = getRow(y).every(el => el.classList.contains('block'))
+      if (fullRow) {
+        clearRow(y)
+      }
+    }
+    
     const gameOver = getRow(height - 1).some(el => el.classList.contains('block'))
     if (gameOver) {
       clearInterval(playing)  

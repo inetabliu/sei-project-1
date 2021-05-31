@@ -6,12 +6,18 @@ body {
   /* height: 100vh; */
   margin: 0;
 }
+main {
+}
+.start {
+  background-image: linear-gradient(#a0462c, #403725);
+  color: #ff0400;
+  padding: 0.5rem 1.5rem 0.5rem;
 
-
+}
 .grid-wrapper {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 /* making the grid pretty fast using this styling */
