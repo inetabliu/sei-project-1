@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-.start {
+#start {
   background-image: linear-gradient(#a0462c, #403725);
   color: #ff0400;
   padding: 0.5rem 1.5rem 0.5rem;

@@ -6,9 +6,10 @@ function init() {
   const arrowRight = 39
   const arrowLeft = 37
   // const arrowDown = 40
+  const startButton = document.getElementById('start')
+  let playing
   const startX = 4
   const startY = height - 1
-
   // State is a 2D array that can be accessed as state[x][y]
   const state = []
   for (let i = 0; i < width; i++) {
@@ -35,6 +36,12 @@ function init() {
       }
     }
   }
+  //will start the game
+  function startGame() {
+    console.log('button is clicking')
+    playing = setInterval(moveBlock, 200)
+    
+  }
 
   //returns an array of all blocks on row y 
   function getRow(y) {
@@ -45,6 +52,7 @@ function init() {
     return row
   }
 
+  // Clear a full row
   function clearRow(y) {
     console.log(`clear row ${y}`)
     getRow(y).map(el => el.classList.remove('block'))
@@ -64,7 +72,7 @@ function init() {
       })
     }
   }
-
+  // New block being spawn
   function spawnBlock() {
     for ( let y = 0; y < height; y++) {
       const fullRow = getRow(y).every(el => el.classList.contains('block'))
@@ -85,7 +93,7 @@ function init() {
     }
     
   }
-
+  //Moving block down the grid
   function moveBlock() {
     const newY = position.y - 1
     if (newY < 0) {
@@ -160,10 +168,12 @@ function init() {
   document.addEventListener('keydown', moveRight)
   document.addEventListener('keydown', moveLeft)
   // document.addEventListener('keydown', hardDrop)
+  startButton.addEventListener('click', startGame)
 
   createPlayfield()
   addBlock(position) // draw first block
-  const playing = setInterval(moveBlock, 200) // start game
+  // start game
+    
   console.log('my state', state)
 }
 
