@@ -3,17 +3,17 @@
 }
 
 body {
-  /* height: 100vh; */
+  height: 100vh;
   margin: 0;
   font-family: 'IBM Plex Mono',sans-serif;
-  background: url(/background.jpeg);
+  background: url(../images/background.jpeg);
   background-size: cover; 
 }
 
 .overline {
   text-decoration: underline;
 }
-.block {
+div.block, div.still-block {
 background: #efe258; 
 }
 
@@ -62,6 +62,7 @@ ul {
   height: 650px;
   width: 350px;
   background-size: cover;
+  color: white
 }
 
 .grid div {
