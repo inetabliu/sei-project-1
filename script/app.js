@@ -53,7 +53,6 @@ function init(){
     tetramino
     // Add first block
     tetramino.map(position => addBlock(position))
-    // console.log('tetrimon', tetramino)
     // Create initial interval
     drop = setInterval(blockInterval, 1000) //change it back to 1000 later
   }
