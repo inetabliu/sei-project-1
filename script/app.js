@@ -31,7 +31,7 @@ function init(){
   const iShape = [3, 4, 5, 6]
   const sqShape = [4, 5, 14, 15]
   const tShape = [4, 5, 6, 15]
-  const shapes = [sShape, lShape, iShape, sqShape, tShape]
+  const shapes = [sqShape, lShape]
   
   //Random shape selector
   const tetramino = shapes[Math.floor(Math.random() * shapes.length)]
@@ -118,6 +118,12 @@ function init(){
     cells[position].classList.remove('block')
   }
 
+  //Clear row
+
+  // function clearRow(){
+  //   fullRow[cell].classList.remove('still-block')
+  // }
+
 
   // Handle key down
   function handleKeydown(event){
@@ -144,7 +150,6 @@ function init(){
       }
 
       if (key === down) {
-        console.log('if key down')
         if (tetramino[i] + width < cellCount && !cells[tetramino[i] + width].classList.contains('still-block')) { 
           //no collision
         } else {
@@ -155,7 +160,6 @@ function init(){
     
     if (!collision) {
       for (let i = 0; i < tetramino.length; i++) {
-        // console.log('position left', tetramino[i])
         // Move left
         // Remove existing block
         removeBlock(tetramino[i])
@@ -182,19 +186,21 @@ function init(){
   //Clear full row
 
   function checkRow() {
-    console.log('its working')
     for (let i = 0; i < cells.length; i += width){
       const fullRow = cells.slice(i, i + width).every(cell => {
-        return cell.classList.contains('still-block')
-        
+        return cell.classList.contains('still-block') 
       })
-      console.log('is full row', fullRow)
-    
-      console.log('my index', i)
+      if (fullRow === true ) {
+        const clearRow = cells.slice(i, i + width).forEach(cell => {
+          cell.classList.remove('still-block')
+        })
+      } else {
+        //what do i do then
+      }
+  
     }
     
   }
-  
   
 
   //Game over function to check if top row is full
