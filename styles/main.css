@@ -13,8 +13,12 @@ body {
 .overline {
   text-decoration: underline;
 }
-div.block, div.still-block {
+div.block {
 background: #efe258; 
+}
+
+div.still-block {
+  background: red;
 }
 
 .score-board, .controls {

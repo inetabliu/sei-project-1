@@ -23,13 +23,17 @@ function init(){
 
   // Tetraminoes
 
-  let tetrimon = [3, 4, 5, 6]
+  
+  
+ 
   const sShape = [5, 6, 14, 15]
   const lShape = [4, 14, 24, 25]
   const iShape = [3, 4, 5, 6]
   const sqShape = [4, 5, 14, 15]
   const tShape = [3, 4, 5, 6]
-
+  const tetraminoes = [sShape, lShape, iShape, sqShape, tShape]
+  console.log('my tetramino array', tetraminoes)
+  const tetramino = tetraminoes[Math.floor(Math.random() * tetraminoes.length)]
 
   // Create grid
   function createGrid(){
@@ -46,31 +50,47 @@ function init(){
   // Drop block
   function dropBlock(){
     // Reset currentPosition
-    tetrimon = [3, 4, 5, 6]
+    tetramino
     // Add first block
-    tetrimon.map(position => addBlock(position))
-    console.log('tetrimon', tetrimon)
+    tetramino.map(position => addBlock(position))
+    // console.log('tetrimon', tetramino)
     // Create initial interval
     drop = setInterval(blockInterval, 1000) //change it back to 1000 later
   }
 
   // Function that handles the dropBlock interval logic
   function blockInterval(){
-    for (let i = 0; i < tetrimon.length; i++) {
+    let collision = false
+    for (let i = 0; i < tetramino.length; i++) {
       // console.log('cell positions and width', cells[tetrimon[0]])
-      if (tetrimon[i] + width >= cellCount || cells[tetrimon[i] + width].classList.contains('still-block')){
+
+      // i = 0
+      // tetrimon[i] = 193
+      if (tetramino[i] + width >= cellCount || cells[tetramino[i] + width].classList.contains('still-block')){
         // Block down doesn't exist
         
         // Convert to still block
-        convertBlock(tetrimon[i])
-      } else {
-        // Truthy
-        removeBlock(tetrimon[i])
-        tetrimon[i] += width 
-        addBlock(tetrimon[i])
-      }
+        collision = true
+        break
+      } 
     }
-  }
+
+    if (collision) {
+      tetramino.map(position => {
+        convertBlock(position)
+      })
+      dropBlock()
+    } else {
+      for (let i = 0; i < tetramino.length; i++){
+        // Truthy
+        removeBlock(tetramino[i])
+        tetramino[i] += width 
+        addBlock(tetramino[i])
+  
+      } 
+    }
+  }   
+  
 
   // Convert block to still-block
   function convertBlock(position){
@@ -79,9 +99,6 @@ function init(){
     // Convert classes
     cells[position].classList.remove('block')
     cells[position].classList.add('still-block')
-    // Drop another block, need to return to the starting tetrimon
-    tetrimon = [3, 4, 5, 6]
-    dropBlock()
   }
 
   // Add block
@@ -98,33 +115,59 @@ function init(){
   // Handle key down
   function handleKeydown(event){
     const key = event.keyCode
-    for (let i = 0; i < tetrimon.length; i++){
-      if (key === left && tetrimon[i] % width !== 0){
-        console.log('position left', tetrimon[i])
-        // Move left
-        // Remove existing block
-        removeBlock(tetrimon[i])
-        // Decrement currentPosition
-        tetrimon[i]--
-        // Add new block
-        addBlock(tetrimon[i])
-      } else if (key === right && tetrimon[i] % width !== width - 1){
-        console.log('right position', tetrimon[i])
-        // Move right
-        // Remove existing block
-        removeBlock(tetrimon[i])
-        // Increment current position
-        tetrimon[i]++
-        // Add new block
-        addBlock(tetrimon[i])
-      } else if (key === down){
-        // Move down
-  
-      } else if (key === up){
-        // Rotate
-  
+    let collision = false
+    for (let i = 0; i < tetramino.length; i++){
+
+      if (key === left){
+        if (tetramino[i] % width !== 0 && !cells[tetramino[i] - 1].classList.contains('still-block')) {
+          //No collision 
+
+        } else {
+          //Colission happened
+          collision = true
+        }
+      }
+      if (key === right){
+        if (tetramino[i] % width !== width - 1 && !cells[tetramino[i] + 1].classList.contains('still-block')){
+          //no collision
+        } else {
+          collision = true
+        }
+
+      }
+      if (key === down) {
+        console.log('if key down')
+        if (tetramino[i] + width < cellCount && !cells[tetramino[i] + width].classList.contains('still-block')) { 
+          //no collision
+        } else {
+          collision = true
+        }
       }
     }
+    if (!collision) {
+      for (let i = 0; i < tetramino.length; i++) {
+        // console.log('position left', tetramino[i])
+        // Move left
+        // Remove existing block
+        removeBlock(tetramino[i])
+        // Decrement currentPosition
+        if (key === left) {
+          tetramino[i]--
+        }
+        if (key === right) {
+          tetramino[i]++
+        }
+        if (key === down) {
+          tetramino[i] += width  
+        }
+   
+      } 
+      //add new block
+      tetramino.forEach(position => {
+        addBlock(position)
+      })
+    } 
+
     
 
   }
