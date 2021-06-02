@@ -4,17 +4,18 @@ function init(){
   const left = 37
   const right = 39
   const down = 40
-  const up = 38
+  const up = 38 // for rotation
 
   // Get grid element
   const grid = document.querySelector('.grid')
 
   // Set size
+  // 10 X 20 Grid
   const width = 10
   const cellCount = width * width * 2
   const cells = []
 
-  //Start 
+  //Start button 
   const startButton = document.getElementById('start')
 
   // Cell position
@@ -32,9 +33,10 @@ function init(){
   const tShape = [4, 5, 6, 15]
   const shapes = [sShape, lShape, iShape, sqShape, tShape]
   
+  //Random shape selector
   const tetramino = shapes[Math.floor(Math.random() * shapes.length)]
 
-  // Create grid
+  // Create grid function 
   function createGrid(){
     for (let i = 0; i < cellCount; i++){
       const cell = document.createElement('div')
@@ -48,13 +50,12 @@ function init(){
 
   // Drop block
   function dropBlock(){
+    checkRow()
     const isGameOver = gameOver()
-    console.log('isGameOver', isGameOver)
-
     if (isGameOver) {
       return
     }
-    
+
     // Reset currentPosition
     const newShape = shapes[Math.floor(Math.random() * shapes.length)]
     for (let i = 0; i < newShape.length; i++) {
@@ -63,6 +64,7 @@ function init(){
     
     // Add first block
     tetramino.map(position => addBlock(position))
+
     // Create initial interval
     drop = setInterval(blockInterval, 1000)
   }
@@ -70,56 +72,54 @@ function init(){
   // Function that handles the dropBlock interval logic
   function blockInterval(){
     let collision = false
+
     for (let i = 0; i < tetramino.length; i++) {
       if (tetramino[i] + width >= cellCount || cells[tetramino[i] + width].classList.contains('still-block')){
         // Block down doesn't exist
-        // Convert to still block
+        // Convert to still-block class
         collision = true
       }
     }
-
+    //Execute this code when collision is true
     if (collision) {
       tetramino.map(position => {
         convertBlock(position)
       })
-
       dropBlock()
-
     } else {
       for (let i = 0; i < tetramino.length; i++){
-        // Truthy
         removeBlock(tetramino[i])
       } 
+
       for (let i = 0; i < tetramino.length; i++) {
         tetramino[i] += width
       }
+      
       for (let i = 0; i < tetramino.length; i++) {
         addBlock(tetramino[i])
       }
     }   
   }
 
-  // Convert block to still-block
+  // Convert block to still-block class
   function convertBlock(position){
-    // Stop interval
     clearInterval(drop)
-    // Convert classes
     cells[position].classList.remove('block')
     cells[position].classList.add('still-block')
   }
 
-  // Add block
+  // Add BLOCK
   function addBlock(position){
     cells[position].classList.add('block')
   }
 
-  // Remove block
+  // Remove BLOCK
   function removeBlock(position){
     cells[position].classList.remove('block')
   }
 
 
-  // // Handle key down
+  // Handle key down
   function handleKeydown(event){
     const key = event.keyCode
     let collision = false
@@ -127,21 +127,22 @@ function init(){
 
       if (key === left){
         if (tetramino[i] % width !== 0 && !cells[tetramino[i] - 1].classList.contains('still-block')) {
-          //No collision 
+          //No collision happens
 
         } else {
           //Colission happened
           collision = true
         }
       }
+    
       if (key === right){
         if (tetramino[i] % width !== width - 1 && !cells[tetramino[i] + 1].classList.contains('still-block')){
           //no collision
         } else {
           collision = true
         }
-
       }
+
       if (key === down) {
         console.log('if key down')
         if (tetramino[i] + width < cellCount && !cells[tetramino[i] + width].classList.contains('still-block')) { 
@@ -176,13 +177,33 @@ function init(){
     } 
   }
 
+
+
+  //Clear full row
+
+  function checkRow() {
+    console.log('its working')
+    for (let i = 0; i < cells.length; i += width){
+      const fullRow = cells.slice(i, i + width).every(cell => {
+        return cell.classList.contains('still-block')
+        
+      })
+      console.log('is full row', fullRow)
+    
+      console.log('my index', i)
+    }
+    
+  }
+  
+  
+
   //Game over function to check if top row is full
   function gameOver() {
     return cells.slice(0,10).some(cell => {
       return cell.classList.contains('still-block')
     })
   }
-  
+
   //Drop first block
   function startGame() {
     cells.map(cell => {
