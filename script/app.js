@@ -14,6 +14,9 @@ function init(){
   const cellCount = width * width * 2
   const cells = []
 
+  //Start 
+  const startButton = document.getElementById('start')
+
   // Cell position
   let position
 
@@ -22,18 +25,14 @@ function init(){
 
 
   // Tetraminoes
-
-  
-  
- 
   const sShape = [5, 6, 14, 15]
   const lShape = [4, 14, 24, 25]
   const iShape = [3, 4, 5, 6]
   const sqShape = [4, 5, 14, 15]
-  const tShape = [3, 4, 5, 6]
-  const tetraminoes = [sShape, lShape, iShape, sqShape, tShape]
-  console.log('my tetramino array', tetraminoes)
-  const tetramino = tetraminoes[Math.floor(Math.random() * tetraminoes.length)]
+  const tShape = [4, 5, 6, 15]
+  const shapes = [sShape, lShape, iShape, sqShape, tShape]
+  
+  const tetramino = shapes[Math.floor(Math.random() * shapes.length)]
 
   // Create grid
   function createGrid(){
@@ -49,47 +48,56 @@ function init(){
 
   // Drop block
   function dropBlock(){
+    const isGameOver = gameOver()
+    console.log('isGameOver', isGameOver)
+
+    if (isGameOver) {
+      return
+    }
+    
     // Reset currentPosition
-    tetramino
+    const newShape = shapes[Math.floor(Math.random() * shapes.length)]
+    for (let i = 0; i < newShape.length; i++) {
+      tetramino[i] = newShape[i]
+    }
+    
     // Add first block
     tetramino.map(position => addBlock(position))
     // Create initial interval
-    drop = setInterval(blockInterval, 1000) //change it back to 1000 later
+    drop = setInterval(blockInterval, 1000)
   }
 
   // Function that handles the dropBlock interval logic
   function blockInterval(){
     let collision = false
     for (let i = 0; i < tetramino.length; i++) {
-      // console.log('cell positions and width', cells[tetrimon[0]])
-
-      // i = 0
-      // tetrimon[i] = 193
       if (tetramino[i] + width >= cellCount || cells[tetramino[i] + width].classList.contains('still-block')){
         // Block down doesn't exist
-        
         // Convert to still block
         collision = true
-        break
-      } 
+      }
     }
 
     if (collision) {
       tetramino.map(position => {
         convertBlock(position)
       })
+
       dropBlock()
+
     } else {
       for (let i = 0; i < tetramino.length; i++){
         // Truthy
         removeBlock(tetramino[i])
-        tetramino[i] += width 
-        addBlock(tetramino[i])
-  
       } 
-    }
-  }   
-  
+      for (let i = 0; i < tetramino.length; i++) {
+        tetramino[i] += width
+      }
+      for (let i = 0; i < tetramino.length; i++) {
+        addBlock(tetramino[i])
+      }
+    }   
+  }
 
   // Convert block to still-block
   function convertBlock(position){
@@ -111,7 +119,7 @@ function init(){
   }
 
 
-  // Handle key down
+  // // Handle key down
   function handleKeydown(event){
     const key = event.keyCode
     let collision = false
@@ -143,6 +151,7 @@ function init(){
         }
       }
     }
+    
     if (!collision) {
       for (let i = 0; i < tetramino.length; i++) {
         // console.log('position left', tetramino[i])
@@ -159,23 +168,32 @@ function init(){
         if (key === down) {
           tetramino[i] += width  
         }
-   
       } 
       //add new block
       tetramino.forEach(position => {
         addBlock(position)
       })
     } 
-
-    
-
   }
+
+  //Game over function to check if top row is full
+  function gameOver() {
+    return cells.slice(0,10).some(cell => {
+      return cell.classList.contains('still-block')
+    })
+  }
+  
+  //Drop first block
+  function startGame() {
+    cells.map(cell => {
+      cell.classList.remove('still-block')
+    })
+    dropBlock()
+  }
+
+  startButton.addEventListener('click', startGame)
   document.addEventListener('keydown', handleKeydown)
- 
-
-  //Draw the first block
-  dropBlock()
-
+  
 }
 
 window.addEventListener('DOMContentLoaded', init)
