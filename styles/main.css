@@ -6,7 +6,7 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'IBM Plex Mono',sans-serif;
-  background: url(../images/background.jpeg);
+  background: url(../images/background.jpeg) no-repeat center center fixed;;
   background-size: cover; 
 }
 
@@ -14,23 +14,19 @@ body {
   text-decoration: underline;
 }
 div.block {
-background: #efe258; 
+background-image: linear-gradient(to right, #d92621, #efe258);
 }
 
 div.still-block {
-  background: red;
+  background-image: url(../images/nanagon.jpeg);
+  background-size: cover;
 }
 
-.score-board, .controls {
+.score-board, .control {
   display: flex;
   flex-direction: column;
   text-align: center;
   color: #efe258;
-}
-
-.margin-top {
-  margin-bottom: 50%;
-  text-align: right;
 }
 
 #start {
@@ -50,9 +46,8 @@ ul {
 }
 
 .grid-wrapper {
-  height: 100vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 
@@ -61,12 +56,11 @@ ul {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
+  margin-top: 10%;
   justify-content: center;
   height: 650px;
   width: 350px;
   background-size: cover;
-  color: white
 }
 
 .grid div {
@@ -74,17 +68,32 @@ ul {
   flex-grow: 1;
   height: 5%;
   width: 10%;
-  font-size: x-small;
   border-radius: 5%;
-  font-display: none;
 }
 
-footer, a {
+.bottom-flex {
   color: #efe258;
-  text-decoration: none;
-  text-align: center;
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
+}
+
+a {
+  text-decoration: none;
+  color: #efe258;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+figcaption {
+  margin-bottom: 5%;
+}
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: #efe258;
 }
 
 @media screen and  (max-width: 350px) {
@@ -94,12 +103,26 @@ footer, a {
   }
   .grid-wrapper {
     flex-direction: column;
+    font-size: 70%;
 
   }
   #start {
     max-width: 50%;
   }
-  .margin-top {
+  .margin-bottom {
     margin-bottom: 0%;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .grid-wrapper {
+    flex-direction: column;
+  }
+  .score-board {
+    order: 1;
+  }
+  audio {
+    width: 70%;
+  }
+}
+  

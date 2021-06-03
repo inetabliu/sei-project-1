@@ -9,21 +9,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <script src="script/app.js" charset="utf-8"></script>
-  <title>Document</title>
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest"> -->
+  <title>Gizzverse Tetris</title>
 </head>
 
 <body>
   <main>
     <div class="grid-wrapper">
-      <div class="score-board margin-top">
+      <div class="score-board margin-bottom">
         <ul>
-          <li>Rows Hit<span>:000</span></li>
-          <li>Total score<span>:000</span></li>
-          <li>Level<span></span>:1</li>
+          <li>Rows Hit:<span id="row">000</span></li>
+          <li>Total score:<span id="score">000</span></li>
+          <li>Level:<span></span>1</li>
         </ul>
       </div>
       <div class="grid"></div>
-      <div class="controls">
+      <div class="control">
         <div>
           <p class="overline">Press start for nanagon infinity</p>
           <button id="start">Start</button>
@@ -32,19 +36,26 @@
         <div class="small-grid">
           <ul>
             <li class="overline">Controls</li>
-            <li>Up Arrow: Rotate</li>
+            <li>Move Left & Right</li>
             <li>Down Arrow: Soft Drop</li>
-            <li>Spacebar: Hard Drop</li>
-            <li>Pause Game: P or Esc</li>
+            <li>Pause Game: P</li>
+            <li>Restart Game: Start</li>
           </ul>
         </div>
+        <figure>
+          <figcaption>Listen to King Gizzard Live in London '19</figcaption>
+          <audio controls>
+          </audio>
+        </figure>
 
       </div>
     </div>
   </main>
   <footer>
-    <a href="https://github.com/inetabliu">Github</a>
-    <p>2021</p>
+    <div class="bottom-flex">
+      <a href="https://github.com/inetabliu">Github</a>
+      <p>2021</p>
+    </div>
   </footer>
 </body>
 

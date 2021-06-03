@@ -4,7 +4,9 @@ function init(){
   const left = 37
   const right = 39
   const down = 40
-  const up = 38 // for rotation
+  // const up = 38 // for rotation
+  const p = 80
+  // const space = 32
 
   // Get grid element
   const grid = document.querySelector('.grid')
@@ -18,11 +20,14 @@ function init(){
   //Start button 
   const startButton = document.getElementById('start')
 
-  // Cell position
-  let position
-
   // Intervals
   let drop
+
+  //Score & row clear
+  const displayScore = document.getElementById('score')
+  const rows = document.getElementById('row')
+  let score = 0
+  let row = 0 
 
 
   // Tetraminoes
@@ -31,17 +36,29 @@ function init(){
   const iShape = [3, 4, 5, 6]
   const sqShape = [4, 5, 14, 15]
   const tShape = [4, 5, 6, 15]
-  const shapes = [sqShape, lShape]
+  const shapes = [sqShape, lShape, sShape, iShape, tShape]
+  
   
   //Random shape selector
-  const tetramino = shapes[Math.floor(Math.random() * shapes.length)]
+  const tetramino = []
+  shapes[Math.floor(Math.random() * shapes.length)].forEach(p => {
+    tetramino.push(p)
+  })
 
+  //AUDIO
+  const audio = document.querySelector('audio')
+  const selector = document.querySelectorAll('button')
+
+  function playAudio(event) {
+    audio.src = `./tunes/${event.target.id}.wav`
+    audio.play()
+  }
+  
   // Create grid function 
   function createGrid(){
     for (let i = 0; i < cellCount; i++){
       const cell = document.createElement('div')
-      cell.innerText = i
-      cell.dataset.id = i
+      cell.id = i
       grid.appendChild(cell)
       cells.push(cell)
     }
@@ -55,7 +72,7 @@ function init(){
     if (isGameOver) {
       return
     }
-
+  
     // Reset currentPosition
     const newShape = shapes[Math.floor(Math.random() * shapes.length)]
     for (let i = 0; i < newShape.length; i++) {
@@ -66,7 +83,7 @@ function init(){
     tetramino.map(position => addBlock(position))
 
     // Create initial interval
-    drop = setInterval(blockInterval, 1000)
+    drop = setInterval(blockInterval, 200)
   }
 
   // Function that handles the dropBlock interval logic
@@ -106,6 +123,7 @@ function init(){
     clearInterval(drop)
     cells[position].classList.remove('block')
     cells[position].classList.add('still-block')
+    console.log('convert block done')
   }
 
   // Add BLOCK
@@ -117,12 +135,6 @@ function init(){
   function removeBlock(position){
     cells[position].classList.remove('block')
   }
-
-  //Clear row
-
-  // function clearRow(){
-  //   fullRow[cell].classList.remove('still-block')
-  // }
 
 
   // Handle key down
@@ -156,6 +168,10 @@ function init(){
           collision = true
         }
       }
+      if (key === p) {
+        clearInterval(drop)
+        // window.alert('Game is paused')
+      }
     }
     
     if (!collision) {
@@ -186,22 +202,29 @@ function init(){
   //Clear full row
 
   function checkRow() {
+    console.log('checking row')
     for (let i = 0; i < cells.length; i += width){
       const fullRow = cells.slice(i, i + width).every(cell => {
         return cell.classList.contains('still-block') 
       })
-      if (fullRow === true ) {
-        const clearRow = cells.slice(i, i + width).forEach(cell => {
+      if (fullRow) {
+        score += 100
+        displayScore.innerText = score
+        row += 1
+        rows.innerText = row
+        cells.slice(i, i + width).forEach(cell => {
           cell.classList.remove('still-block')
         })
-      } else {
-        //what do i do then
+        cells.slice(0, i).reverse().map(cell => {
+          if (cell.classList.contains('still-block')) {
+            const j = parseInt(cell.id)
+            cell.classList.remove('still-block')
+            cells[j + width].classList.add('still-block')
+          }
+        })
       }
-  
     }
-    
   }
-  
 
   //Game over function to check if top row is full
   function gameOver() {
@@ -217,10 +240,19 @@ function init(){
     })
     dropBlock()
   }
-
+  selector.forEach(button => {
+    button.addEventListener('click', playAudio)
+  })
+  // EVENT LISTENERS
   startButton.addEventListener('click', startGame)
   document.addEventListener('keydown', handleKeydown)
-  
+
+  //Prevent default window moving
+  window.addEventListener('keydown', function(e) {
+    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].indexOf(e.code) > -1) {
+      e.preventDefault()
+    }
+  }, false)
 }
 
 window.addEventListener('DOMContentLoaded', init)
