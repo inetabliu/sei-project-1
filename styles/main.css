@@ -9,22 +9,16 @@ body {
   background: url(../images/background.jpeg) no-repeat center center fixed;;
   background-size: cover; 
 }
+/* Score board , controls, text*/
 
 #align {
   text-align: start;
   padding: 0 50px;
 }
 
-.underline {
-  text-decoration: underline;
-}
-div.block {
-background-image: linear-gradient(to right, #d92621, #efe258);
-}
-
-div.still-block {
-  background-image: url(../images/nanagon.jpeg);
-  background-size: cover;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .score-board, .control {
@@ -33,6 +27,10 @@ div.still-block {
   text-align: center;
   color: #efe258;
   height: 500px;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 #start {
@@ -45,9 +43,14 @@ div.still-block {
   font-family: 'IBM Plex Mono',sans-serif;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+/* Grid & moving blocks */
+div.block {
+background-image: linear-gradient(to right, #d92621, #efe258);
+}
+
+div.still-block {
+  background-image: url(../images/nanagon.jpeg);
+  background-size: cover;
 }
 
 .grid-wrapper {
@@ -76,11 +79,13 @@ ul {
   border-radius: 5%;
 }
 
+/* Footer styling */
 .bottom-flex {
   color: #efe258;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 5%;
 }
 
 a {
@@ -88,13 +93,22 @@ a {
   color: #efe258;
 }
 
-figure {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+img {
+  width: 5%;
 }
+
+
+
+
+/* Audio styling */
 figcaption {
   margin-bottom: 5%;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .track {
@@ -109,6 +123,8 @@ audio::-webkit-media-controls-panel {
   background-color: #efe258;
 }
 
+
+/* Media queries*/
 @media screen and  (max-width: 350px) {
   .grid {
     height: 450px;
