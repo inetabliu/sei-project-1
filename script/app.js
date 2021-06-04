@@ -72,6 +72,8 @@ function init(){
     const isGameOver = gameOver()
     if (isGameOver) {
       window.open('/Users/inetabliudziute/development/projects/sei-project-1/Game_Over.html')
+      audio.pause()
+      audio.currentTime = 0
     }
     // Reset currentPosition
     const newShape = shapes[Math.floor(Math.random() * shapes.length)]
@@ -83,7 +85,7 @@ function init(){
     tetramino.map(position => addBlock(position))
 
     // Create initial interval
-    drop = setInterval(blockInterval, 200)
+    drop = setInterval(blockInterval, 1000)
   }
 
   // Function that handles the dropBlock interval logic
