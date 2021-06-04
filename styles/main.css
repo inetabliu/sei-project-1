@@ -10,7 +10,12 @@ body {
   background-size: cover; 
 }
 
-.overline {
+#align {
+  text-align: start;
+  padding: 0 50px;
+}
+
+.underline {
   text-decoration: underline;
 }
 div.block {
@@ -27,6 +32,7 @@ div.still-block {
   flex-direction: column;
   text-align: center;
   color: #efe258;
+  height: 500px;
 }
 
 #start {
@@ -42,7 +48,6 @@ div.still-block {
 ul {
   list-style-type: none;
   padding: 0;
-
 }
 
 .grid-wrapper {
@@ -91,6 +96,14 @@ figure {
 figcaption {
   margin-bottom: 5%;
 }
+
+.track {
+  background-image: linear-gradient(#a0462c,#6e8569, #403725);
+  color: #efe258;
+  font-family: 'IBM Plex Mono',sans-serif;
+  margin-bottom: 5%;
+}
+
 audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
   background-color: #efe258;
@@ -109,8 +122,11 @@ audio::-webkit-media-controls-panel {
   #start {
     max-width: 50%;
   }
-  .margin-bottom {
+  #align {
     margin-bottom: 0%;
+  }
+  .track {
+    font-size: small;
   }
 }
 
@@ -123,6 +139,9 @@ audio::-webkit-media-controls-panel {
   }
   audio {
     width: 70%;
+  }
+  figure {
+    display: inline;
   }
 }
   
