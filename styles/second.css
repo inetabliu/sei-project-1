@@ -1,0 +1,16 @@
+body {
+ background: black
+}
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+p {
+  font-family: 'IBM Plex Mono',sans-serif;
+  color:rgb(26, 255, 0);
+  font-size: xx-large;
+  text-align: center;
+}

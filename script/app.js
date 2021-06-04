@@ -47,9 +47,10 @@ function init(){
 
   //AUDIO
   const audio = document.querySelector('audio')
-  const selector = document.querySelectorAll('button')
+  const selector = document.querySelectorAll('.track')
 
   function playAudio(event) {
+    console.log('event.target', event)
     audio.src = `./tunes/tunes/${event.target.id}.wav`
     audio.play()
   }
@@ -70,9 +71,8 @@ function init(){
     checkRow()
     const isGameOver = gameOver()
     if (isGameOver) {
-      return
+      window.open('/Users/inetabliudziute/development/projects/sei-project-1/Game_Over.html')
     }
-  
     // Reset currentPosition
     const newShape = shapes[Math.floor(Math.random() * shapes.length)]
     for (let i = 0; i < newShape.length; i++) {
@@ -92,8 +92,6 @@ function init(){
 
     for (let i = 0; i < tetramino.length; i++) {
       if (tetramino[i] + width >= cellCount || cells[tetramino[i] + width].classList.contains('still-block')){
-        // Block down doesn't exist
-        // Convert to still-block class
         collision = true
       }
     }
@@ -123,7 +121,6 @@ function init(){
     clearInterval(drop)
     cells[position].classList.remove('block')
     cells[position].classList.add('still-block')
-    console.log('convert block done')
   }
 
   // Add BLOCK
@@ -137,7 +134,7 @@ function init(){
   }
 
 
-  // Handle key down
+  // Handle Key Down Function
   function handleKeydown(event){
     const key = event.keyCode
     let collision = false
@@ -146,7 +143,6 @@ function init(){
       if (key === left){
         if (tetramino[i] % width !== 0 && !cells[tetramino[i] - 1].classList.contains('still-block')) {
           //No collision happens
-
         } else {
           //Colission happened
           collision = true
@@ -170,7 +166,7 @@ function init(){
       }
       if (key === p) {
         clearInterval(drop)
-        // window.alert('Game is paused')
+        
       }
     }
     
@@ -200,9 +196,7 @@ function init(){
 
 
   //Clear full row
-
   function checkRow() {
-    console.log('checking row')
     for (let i = 0; i < cells.length; i += width){
       const fullRow = cells.slice(i, i + width).every(cell => {
         return cell.classList.contains('still-block') 
@@ -235,17 +229,22 @@ function init(){
 
   //Drop first block
   function startGame() {
+    audio.src = './tunes/tunes/cellophane.wav'
+    audio.play()
     cells.map(cell => {
       cell.classList.remove('still-block')
     })
     dropBlock()
   }
-  selector.forEach(button => {
-    button.addEventListener('click', playAudio)
-  })
+
+  
   // EVENT LISTENERS
   startButton.addEventListener('click', startGame)
   document.addEventListener('keydown', handleKeydown)
+  selector.forEach(button => {
+    button.addEventListener('click', playAudio)
+  })
+  
 
   //Prevent default window moving
   window.addEventListener('keydown', function(e) {
