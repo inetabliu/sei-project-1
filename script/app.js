@@ -6,7 +6,7 @@ function init(){
   const down = 40
   // const up = 38 // for rotation
   const p = 80
-  // const space = 32
+  const space = 32
 
   // Get grid element
   const grid = document.querySelector('.grid')
@@ -53,6 +53,7 @@ function init(){
     console.log('event.target', event)
     audio.src = `./tunes/tunes/${event.target.id}.wav`
     audio.play()
+    audio.volume = 0.4
   }
   
   // Create grid function 
@@ -170,6 +171,9 @@ function init(){
         clearInterval(drop)
         
       }
+      if (key === space) {
+        return false
+      }
     }
     
     if (!collision) {
@@ -233,6 +237,7 @@ function init(){
   function startGame() {
     audio.src = './tunes/tunes/cellophane.wav'
     audio.play()
+    audio.volume = 0.3
     cells.map(cell => {
       cell.classList.remove('still-block')
     })
