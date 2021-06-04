@@ -4,20 +4,6 @@ General Assembly Project 1
 Tetris Game
 
 
-Timeframe
-
-7 days
-
-
-Technologies Used
-HTML5 with HTML5 audio
-CSS3
-JavaScript (ES6)
-Git
-GitHub
-Google Fonts
-
-
 Controls
 Click the Start Button to start the game
 Use the left arrow and right-arrow keys to move Tetrominoes left and right, respectively.
@@ -38,3 +24,10 @@ Day 7 - Rows clearing & moving down final attempt to get the rotation working.
 Final Day - FRIDAY 
 Deployment day
 
+Technologies Used
+HTML5 with HTML5 audio
+CSS3
+JavaScript (ES6)
+Git
+GitHub
+Google Fonts
