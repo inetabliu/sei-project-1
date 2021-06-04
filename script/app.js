@@ -50,7 +50,7 @@ function init(){
   const selector = document.querySelectorAll('button')
 
   function playAudio(event) {
-    audio.src = `./tunes/${event.target.id}.wav`
+    audio.src = `./tunes/tunes/${event.target.id}.wav`
     audio.play()
   }
   
