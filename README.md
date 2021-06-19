@@ -1,4 +1,4 @@
-# sei-project-1
+# SEI-56 Project 1 -Tetris Game
 General Assembly Project 1
 
 Tetris Game
