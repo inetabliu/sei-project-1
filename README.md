@@ -1,7 +1,10 @@
+## Readme currently in progress... ![3%](https://progress-bar.dev/3)
+
 # SEI-56 Project 1 -Tetris Game
 General Assembly Project 1
 
 Tetris Game
+![Screenshot 2021-08-04 at 15 44 06](https://user-images.githubusercontent.com/81913593/128994778-b15a9d53-b31b-4b1c-9474-919a13d5c3e4.png)
 
 
 Controls
