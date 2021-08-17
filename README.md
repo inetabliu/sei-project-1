@@ -1,38 +1,59 @@
 ## Readme currently in progress... ![3%](https://progress-bar.dev/3)
 
 # SEI-56 Project 1 -Tetris Game
-General Assembly Project 1
-
 Tetris Game
 ![Screenshot 2021-08-04 at 15 44 06](https://user-images.githubusercontent.com/81913593/128994778-b15a9d53-b31b-4b1c-9474-919a13d5c3e4.png)
+You can find deployed version [here](https://inetabliu.github.io/sei-project-1/)
+
+## Overview
+
+My implementation of classic Tetris game, build only using vanilla Javascript, CSS & HTML. I had a choice to pick from 10 different games and my original shortlist has been Connect 4, Snake & Tetris. Tetris has been my number 1 choices as I loved the game since I was a kid, although I knew that it will potentially be the most challenging game of them all.
+
+### Timeframe 
+7 days
+
+## Brief
+* **Render a game in the browser**
+* **Be built on a grid: do not use HTML Canvas for this**
+* **Design logic for winning** & **visually display which player won**
+* Use **Javascript** for **DOM manipulation**
+
+## Technologies Used
++ HTML5 with HTML5 audio
++ CSS3
++ JavaScript (ES6)
++ Git/ Github
++ Google Fonts
+
+### Controls
++ Press ``start`` button to start the game
++ ``<-`` to move left ``->`` to move right
++ ``↓`` to drop tetramino down
++ No rotation of tetraminos available right now.
+
+### Process 
+
+ I was extremely excited and went on researching Tetris to it's fullest. Upon my searches I have found vast amounts of information about the game and it's different variations. I've spent the first day of the project replaying the game and familiarising myself with the rules mosntly researching it on [Tetris Fandom](https://tetris.fandom.com/wiki/Tetris_Wiki).
+ 
+ I've decided to start my project with getting one colored block to move down the grid, add collision detection on left and right as well as bottom and then move to spawning another block and repeating the process. 
+ 
+ 
+ ### Wins
+ + Managed to build a almost fully working browser rendered Tetris game, even after the hurdle of extreme imposter syndrome.
+ + Clearing rows and moving blocks down after it's cleared. It was great to complete one of the major game conditions pretty easily. I definitely harnessed my ability to use different Javasscript methods to complete the row clearing function in my game.
+ 
+ ### Challenges
+ + Rotation of tetraminoes has been the biggest challenges and something that I dind't have enough time to complete mainly due to needing to scrap my project halfway through and start all over again.
+ + Collision detection. Dealling with collision detection has been a challenge for sure, with every tetramino being formed of 4 differently arranged blocks has proven to be difficult.
+ + Poor planning has lead to needing to scrap my project 4 days into it and start all over again, which has been a challenging experience for my self confidence as a developer.
+ 
+ 
+ ### Key learnings
+ + The major learning experience in this project wasn't to do with coding at all. It was an emotional expwrience as I was really doubting my abilities as a developer at first hand try at the game, but managed to put my imposter syndrome behind and produce a kickass looking game
+ + First use of event listeners and DOM.
+ + Javascript fundarmentals. The hardest hurdle has been building the confidence in writting JS logic and building Tetris which is extremely heavy on logic has been a great learning experience.
 
 
-Controls
-Click the Start Button to start the game
-Use the left arrow and right-arrow keys to move Tetrominoes left and right, respectively.
-Down arrow let syou move tetriminoes downwards
 
-Day 0 - Submitted my 3 choices for the game: Tetris, Snake & Connect 4. Knowing that Tetris was the hardest of them all, I've been encouraged to challenge myself and go ahead with the hardest choice, Tetris has been my Nr.1 choice from the second I've seen all of the 10 games I could build. After deciding that I will be building Tetris, I was extremely excited and went on researching Tetris to it's fullest. Upon my searches I have found vast amounts of information about the game and it's different variations. The website that stuck with me the most was (https://www.arkmay.com/tetris/pieces.html) and where the most basic familiarisation with all the aspects of the game happened (https://tetris.fandom.com/wiki/Tetris_Wiki). The logic was flowing, confidence was up until I realised it was the hardest game out of them all.
 
-You can find deployed version here (https://inetabliu.github.io/sei-project-1/)
 
-Day 1 - Pseudocode
-Create 12 x 20 Grid
-
-Day 2 - Panic kicks in
-Day 3 - Sunday 
-Day 4 - Monday
-Day 5 - Restart the project using one dimensional arrays
-Day 6 - Wednesday
-Day 7 - Rows clearing & moving down final attempt to get the rotation working.
-
-Final Day - FRIDAY 
-Deployment day
-
-Technologies Used
-HTML5 with HTML5 audio
-CSS3
-JavaScript (ES6)
-Git
-GitHub
-Google Fonts
