@@ -1,4 +1,4 @@
-## Readme currently in progress... ![3%](https://progress-bar.dev/3)
+## Readme currently in progress... ![40%](https://progress-bar.dev/40)
 
 # SEI-56 Project 1 -Tetris Game
 Tetris Game
